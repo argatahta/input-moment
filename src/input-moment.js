@@ -1,5 +1,5 @@
 import cx from 'classnames';
-import moment from 'moment';
+import moment from 'moment-timezone';
 import React, { Component } from 'react';
 import Calendar from './calendar';
 import Time from './time';
@@ -32,6 +32,7 @@ export default class InputMoment extends Component {
     const { tab } = this.state;
     const {
       moment: m,
+      timezone,
       className,
       prevMonthIcon,
       nextMonthIcon,
@@ -66,7 +67,8 @@ export default class InputMoment extends Component {
         <div className="tabs">
           <Calendar
             className={cx('tab', { 'is-active': tab === 0 })}
-            moment={m}
+            moment={moment.tz(m, timezone)}
+            timezone={timezone}
             onChange={this.props.onChange}
             prevMonthIcon={this.props.prevMonthIcon}
             nextMonthIcon={this.props.nextMonthIcon}
@@ -75,7 +77,8 @@ export default class InputMoment extends Component {
           />
           <Time
             className={cx('tab', { 'is-active': tab === 1 })}
-            moment={m}
+            timezone={timezone}
+            moment={moment.tz(m, timezone)}
             minStep={this.props.minStep}
             hourStep={this.props.hourStep}
             onChange={this.props.onChange}

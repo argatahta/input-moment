@@ -97,13 +97,14 @@ export default class Calendar extends Component {
 
 
   prevMonthShouldBeDisabled = currentMoment => {
-    const currentMomentCopy = moment(currentMoment);
+    const currentMomentCopy = moment.tz(currentMoment, this.props.timezone);
 
     currentMomentCopy.subtract(1, 'month');
     currentMomentCopy.endOf('month');
  
     this.setState({
-      prevMonthShouldBeDisabled: currentMomentCopy.isBefore(this.props.minDate)
+      // prevMonthShouldBeDisabled: currentMomentCopy.isBefore(this.props.minDate),
+      prevMonthShouldBeDisabled: false
     });
   };
 
@@ -130,7 +131,8 @@ export default class Calendar extends Component {
     currentMomentCopy.startOf('month');
 
     this.setState({
-      nextMonthShouldBeDisabled: currentMomentCopy.isAfter(this.props.maxDate)
+      // nextMonthShouldBeDisabled: currentMomentCopy.isAfter(this.props.maxDate)
+      nextMonthShouldBeDisabled: false
     });
   };
 
@@ -145,6 +147,7 @@ export default class Calendar extends Component {
 
   render() {
     const m = this.props.moment;
+    const tz = this.props.timezone;
     const d = m.date();
     const month = m.month();
     const year = m.year();
@@ -157,8 +160,8 @@ export default class Calendar extends Component {
       range(1, 42 - d3 - d2 + 1)
     );
     const weeks = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-    const minDate = this.props.minDate;
-    const maxDate = this.props.maxDate;
+    const minDate = moment.tz(this.props.minDate, tz);
+    const maxDate = moment.tz(this.props.maxDate, tz);
 
     return (
       <div className={cx('m-calendar', this.props.className)}>

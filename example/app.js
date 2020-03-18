@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom';
 import InputMoment from '../src/input-moment';
 import packageJson from '../package.json';
 
+const timezone = 'Australia/Sydney'
 class App extends Component {
   state = {
     m: moment(),
@@ -36,7 +37,9 @@ class App extends Component {
             moment={this.state.m}
             onChange={this.handleChange}
             minStep={5}
+            timezone={timezone}
             onSave={this.handleSave}
+            hourStep={1}
             minDate={this.state.minDate}
             maxDate={this.state.maxDate}
           />

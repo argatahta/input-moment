@@ -50,6 +50,7 @@
   "dependencies": {
     "classnames": "^2.2.0",
     "lodash": "^4.17.4",
+    "moment-timezone": "^0.5.28",
     "react-input-slider": "^4.0.0"
   },
   "repository": {
